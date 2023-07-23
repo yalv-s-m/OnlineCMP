@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OnlineCMP</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-9i/M4IjlzRXMkLJgYYoopZBn+sZdEmJf3F4CO8i6pYj1zA+h1vLkJWqtKK8ZD7zy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/darcula.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-9i/M4IjlzRXMkLJgYYoopZBn+sZdEmJf3F4CO8i6pYj1zA+h1vLkJWqtKK8ZD7zy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/darcula.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/go/go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/swift/swift.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/dart/dart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/javascript/javascript.min.js"></script>
+</head>
+<body onload="updateFileName(); updateUnixOutput()">
+    <header class = "header">
+        <span class = "name">OnlineCMP</span>
+    </header>
+
+<div class="grid-container">
+    <div class="center">
+        <div class="top_buttons"> 
+            <div class="lang_selector">
+                <span class="lang_header">Language</span>
+                <select id="lang_menu" class="dropping_selector" onchange="updateHighlightMode(); updateFileName()">
+                    <option value="py">Python</option>
+                    <option value="js">JavaScript</option>
+                    <option value="c">C</option>
+                    <option value="cpp">C++</option>
+                    <option value="dart">Dart</option>
+                    <option value="go">GoLANG</option>
+                    <option value="swift">Swift</option>
+                </select>
+            </div>
+
+            <div class="control_buttons">
+                <button class="play_button" onclick="sendData(); return false;">
+                    <img src="/assets/img/btn_play.png"></img>    
+                </button>
+
+                <button class="attach_button">
+                    <img src="/assets/img/file.png"></img>
+                </button>
+            </div>
+	   <input readonly type="text" class="file_name" id="file_name" name="file_name"></input>
+        </div>
+
+        <textarea class="input_area" id="input_text_area"></textarea>
+
+        <input type="hidden" name="choosen_lang" id="choosen_lang"></input>
+
+    <textarea readonly class="output_area" id="output_text_area"></textarea>
+    </div>
+	<div class="UNIX-block" id="UNIX-block">
+		<div class="checkbox">Use tests:
+			<input type="checkbox" id="checkbox" onchange="updateCheckboxState()"></input>
+		</div>
+		
+		<div class="UNIX-output hide" id="UNIX-output">
+		</div>
+	</div>
+	<div class="unix-output-block" id="unix-output-block" style="display: none;">
+        <p id="case_text">some loooooooooooooooooooooooooong text</p>
+        </div>
+
+</div>
+<script src="/assets/scripts.js"></script>
+</body>
+</html>

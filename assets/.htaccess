@@ -1,0 +1,5 @@
+Order deny,allow
+Deny from all
+<FilesMatch "\.(css|js|png)$">
+    Allow from localhost
+</FilesMatch>

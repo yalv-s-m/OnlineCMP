@@ -1,0 +1,10 @@
+docker build -t my_container .
+
+docker create --name temp_container my_container
+
+docker cp file.py temp_container:/home/file.py
+
+docker start -a temp_container
+
+Дает возможность изменять содержимое file.py, 
+не пересобирая контейнер.

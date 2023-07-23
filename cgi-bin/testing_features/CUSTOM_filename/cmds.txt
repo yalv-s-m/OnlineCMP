@@ -1,0 +1,2 @@
+cmd_build_cont = f'docker build -t {tmp_name} --build-arg FILENAME={FULLNAME} {tmp_dir_path}'
+cmd_open_cont = f'docker run --rm --env FILENAME={FULLNAME} {tmp_name} > {tmp_dir_path}/output.txt 2>&1'
