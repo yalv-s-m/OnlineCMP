@@ -5,26 +5,25 @@ var editor = CodeMirror.fromTextArea(document.getElementById("input_text_area"),
          autofocus: true
          });
 
+
+// all imported modes from CodeMirror
+var highlightModes = {
+	'py': 'python',
+	'js': 'javascript',
+  	'java': 'text/x-java',
+  	'c': 'text/x-csrc',
+  	'cpp': 'text/x-c++src',
+  	'dart': 'dart',
+  	'go': 'go',
+  	'swift': 'swift'
+	};
+
 function updateHighlightMode() {
-         selectedLanguage = document.getElementById('lang_menu').value;
-         if (selectedLanguage === 'py') {
-           editor.setOption('mode', 'python');
-         } else if (selectedLanguage === 'js') {
-           editor.setOption('mode', 'javascript');
-         } else if (selectedLanguage === 'java') {
-           editor.setOption('mode', 'text/x-java');
-         } else if (selectedLanguage === 'c') {
-           editor.setOption('mode', 'text/x-csrc');
-         } else if (selectedLanguage === 'cpp') {
-           editor.setOption('mode', 'text/x-c++src');
-         } else if (selectedLanguage === 'dart') {
-           editor.setOption('mode', 'dart');
-         } else if (selectedLanguage === 'go') {
-           editor.setOption('mode', 'go');
-         } else if (selectedLanguage === 'swift') {
-           editor.setOption('mode', 'swift');
-            }
-         }
+        var selectedLanguage = document.getElementById('lang_menu').value;
+	var mode = highlightModes[selectedLanguage];
+	editor.setOption('mode', mode);
+	}
+
 
 // changes default "main.py" to "main...." onchange of lang list
 document.getElementById("file_name").value = "main";
@@ -76,10 +75,10 @@ function sendData() {
          const userText = editor.getValue();
          const language = document.getElementById('lang_menu').value;
          /*const fileName = document.getElementById('file_name').value;*/
-	 const checkboxState = updateCheckboxState();
+	 const isChecked = updateCheckboxState();
          let url = 'cgi-bin/handler.py';
 
-	if (checkboxState) {
+	if (isChecked) {
 		url = 'cgi-bin/tester.py';
 	}
 
@@ -88,7 +87,7 @@ function sendData() {
          formData.append('user_text', userText);
          formData.append('progr_lang', language);
          /*formData.append('file_name', fileName);*/
-	 formData.append('checkboxState', checkboxState);
+	 formData.append('checkboxState', isChecked);
 
 	// gets processed data back
          xhttp.onreadystatechange = function() {
@@ -98,7 +97,7 @@ function sendData() {
 		 numberOfCases = response.number_of_cases;
 		 indexes_of_failed_cases = response.indexes_of_failed_cases;
 		 listOfCases = processedText.split('%%%');
-		 if (checkboxState) {
+		 if (isChecked) {
 			 document.getElementById('output_text_area').value = "";
 			 updateUnixOutput();
 		 } else {
