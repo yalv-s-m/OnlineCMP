@@ -1,9 +1,10 @@
-FROM golang:1.16.3
+FROM alpine:3.14
+
+RUN apk add --no-cache go
+
+RUN adduser -D user && \
+    chown -R user:user /home
+
+USER user
 
 WORKDIR /home
-
-ADD main.go /home
-
-RUN go mod init go_app
-
-ENTRYPOINT go run /home/main.go

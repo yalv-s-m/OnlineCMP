@@ -1,9 +1,10 @@
-FROM alpine:3.13
+FROM alpine:3.14
 
-RUN apk add gcc musl-dev
+RUN apk add --no-cache gcc musl-dev
+
+RUN adduser -D user && \
+    chown -R user:user /home
+
+USER user
 
 WORKDIR /home
-
-COPY main.c /home
-
-ENTRYPOINT gcc /home/main.c -o /home/a.out && /home/a.out

@@ -1,7 +1,8 @@
 FROM google/dart
 
+RUN adduser user && \
+    chown -R user:user /home
+
+USER user
+
 WORKDIR /home
-
-COPY main.dart /home
-
-ENTRYPOINT dart /home/main.dart

@@ -1,7 +1,10 @@
-FROM gcc:9.4.0
+FROM alpine:3.14
+
+RUN apk add --no-cache g++
+
+RUN adduser -D user && \
+    chown -R user:user /home
+
+USER user
 
 WORKDIR /home
-
-COPY main.cpp /home
-
-ENTRYPOINT g++ /home/main.cpp -o /home/a.out && /home/a.out
